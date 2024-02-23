@@ -5,7 +5,7 @@ import { getHighlights } from '../services/apiHighlights'
 // Load more functionality with search with whats currently loaded
 // TODO: Search doesn't work with unloaded data from the server only workers from whats currently rendered.
 
-// TODO: search from the api needs to be implmented where getHighlights API needs to accept params.
+// TODO: search from the api needs to be implemented where getHighlights API needs to accept params.
 const Highlights = () => {
 	const [search, setSearch] = useState('')
 
@@ -32,11 +32,27 @@ const Highlights = () => {
 
 	const filteredData = useMemo(() => {
 		if (!data) return []
-		return data.pages
-			.flatMap((page) => page.data)
-			.filter((highlight) =>
-				highlight.further_reading_title.toLowerCase().includes(search.toLowerCase())
-			)
+		return (
+			data.pages
+				// Displays result page by page and items by items
+				.flatMap((page) => page.data) // displays the reversed pages
+
+				// reverses the order of the pages not the item
+				// .slice() // creates a copy of the page
+				// .reverse() // reverses the pages orders
+				// .flatMap((page) => page.data) // displays the reversed pages
+
+				// reverses both the pages and the items
+				// .flatMap((page) => page.data)
+				// .slice()
+				// .reverse()
+
+				.filter((highlight) =>
+					highlight.further_reading_title
+						.toLowerCase()
+						.includes(search.toLowerCase())
+				)
+		)
 	}, [data, search])
 
 	if (isLoading) return <p>Loading...</p>
@@ -44,14 +60,17 @@ const Highlights = () => {
 
 	return (
 		<div>
+			<h4>Highlights List</h4>
 			<input
 				type='text'
 				value={search}
 				onChange={(e) => setSearch(e.target.value)}
 				placeholder='Search...'
 			/>
+			<br />
+			<br />
 			<div
-				style={{ height: '800px', backgroundColor: 'skyblue', overflowY: 'auto' }}
+				style={{ height: '500px', backgroundColor: 'skyblue', overflowY: 'auto' }}
 			>
 				{filteredData.map((highlight) => {
 					const {
@@ -66,20 +85,20 @@ const Highlights = () => {
 						</p>
 					)
 				})}
-				<div>
-					{hasNextPage && (
-						<button
-							onClick={() => fetchNextPage()}
-							disabled={!hasNextPage || isFetchingNextPage}
-						>
-							{isFetchingNextPage
-								? 'Loading more...'
-								: hasNextPage
-									? 'Load More'
-									: 'Nothing more to load'}
-						</button>
-					)}
-				</div>
+			</div>
+			<div>
+				{hasNextPage && (
+					<button
+						onClick={() => fetchNextPage()}
+						disabled={!hasNextPage || isFetchingNextPage}
+					>
+						{isFetchingNextPage
+							? 'Loading more...'
+							: hasNextPage
+								? 'Load More'
+								: 'Nothing more to load'}
+					</button>
+				)}
 			</div>
 		</div>
 	)
