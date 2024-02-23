@@ -9,7 +9,6 @@ export const searchHighlightsByTitle = async ({ queryKey }) => {
 			'question_bank_id, ai_model, difficulty_level, further_reading_title,explanation, topic (topic)'
 		)
 		.ilike('further_reading_title', `%${title}%`)
-	// .ilike('difficulty_level', difficulty)
 
 	// console.log(data)
 
