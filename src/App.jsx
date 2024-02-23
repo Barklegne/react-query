@@ -4,12 +4,14 @@
 
 // import Highlights from './react-query/Highlights'
 // import HighlightsByDifficulty from './react-query/HighlightsByDifficulty'
-import HighlightsByDifficultyPaginated from './react-query/HighlightsByDifficultyPaginated';
+// import HighlightsByDifficultyPaginated from './react-query/HighlightsByDifficultyPaginated';
+import SearchFromSupabase from './react-query/SearchFromSupabase'
 
 
 
 export default function App() {
 	// return <Highlights />
 	// return <HighlightsByDifficulty />
-	return <HighlightsByDifficultyPaginated />
+	// return <HighlightsByDifficultyPaginated />
+	return <SearchFromSupabase />
 }

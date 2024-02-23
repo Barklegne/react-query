@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import supabase from './supabase'
 
 // returns core concepts highlights from question bank table
@@ -62,8 +63,8 @@ export const getHighlightsByDifficultyPaginated = async ({
 	queryKey,
 }) => {
 	const [_key, where] = queryKey
-	console.log('_key:', _key)
-	console.log('where...', where.difficulty)
+	// console.log('_key:', _key)
+	// console.log('where...', where.difficulty)
 
 	const { data, error, count } = await supabase
 		.from('question_bank')

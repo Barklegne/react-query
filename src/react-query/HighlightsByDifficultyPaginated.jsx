@@ -45,7 +45,7 @@ const HighlightsByDifficultyPaginated = () => {
 								question_bank_id: id,
 								further_reading_title: readingTitle,
 								difficulty_level: level,
-								topic: { topic: topicTitle },
+								// topic: { topic: topicTitle },
 							} = highlight
 							return (
 								<span key={id}>
