@@ -6,7 +6,7 @@ import { searchHighlightsByTitle } from '../services/apiSearch'
 const SearchFromSupabase = () => {
 	const [searchTerm, setSearchTerm] = useState('')
 	// Debounce the setSearchTerm function to prevent the query from being fired on every keystroke
-	const debouncedSetSearchTerm = debounce((value) => setSearchTerm(value), 500)
+	const debouncedSetSearchTerm = debounce((value) => setSearchTerm(value), 3000)
 
 	const { data, isLoading, isError, isFetching } = useQuery(
 		['searchHighlightsByTitle', searchTerm],
